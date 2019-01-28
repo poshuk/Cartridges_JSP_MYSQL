@@ -25,14 +25,13 @@ public class CartridgeDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         List<Cartridge> cartridges = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
              PreparedStatement prepStat = connection.prepareStatement("SELECT * FROM CARTRIDGES");
-            ResultSet rs = prepStat.executeQuery();
-             ){
+            ResultSet rs = prepStat.executeQuery()){
 
             while (rs.next()) {
                 String time = rs.getString(2).substring(0, rs.getString(2).length() - 2);
@@ -66,7 +65,7 @@ public class CartridgeDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -91,7 +90,7 @@ public class CartridgeDAO {
             ps.setString(7, cartridge.getLastName());
             ps.executeUpdate();
         } catch (SQLException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
